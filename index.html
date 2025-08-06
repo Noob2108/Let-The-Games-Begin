@@ -11,9 +11,36 @@
 <body>
   <main id="app">
     <h1>Let the Games Begin</h1>
-    <button onclick="startGame()">Unleash the Carnal Protocol</button>
-    <div id="gameArea"></div>
+    <div id="setup">
+      <input id="player1" placeholder="Player 1 Name" />
+      <input id="player2" placeholder="Player 2 Name" />
+      <select id="mode">
+        <option value="standard">Standard Mode</option>
+        <option value="blitz">Bedroom Blitz</option>
+      </select>
+      <select id="intensity">
+        <option value="tease">Tease</option>
+        <option value="dirty">Dirty</option>
+        <option value="carnal">Carnal Protocol</option>
+      </select>
+      <h3>Kink Toggles</h3>
+      <label><input type="checkbox" id="bondage" checked> Bondage/Restraints</label><br>
+      <label><input type="checkbox" id="toys" checked> Toys/Vibrators</label><br>
+      <label><input type="checkbox" id="anal" checked> Anal Play</label><br>
+      <label><input type="checkbox" id="edging" checked> Edging/Orgasm Control</label><br>
+      <label><input type="checkbox" id="public" checked> Public Risk</label><br>
+      <h3>Number of Rounds</h3>
+      <input type="number" id="roundCount" min="1" max="25" value="10" />
+      <button onclick="startGame()">Unleash the Carnal Protocol</button>
+    </div>
+    <div id="gameArea" style="display:none;">
+      <h2 id="taskTitle"></h2>
+      <p id="taskText"></p>
+      <p id="timer"></p>
+      <button onclick="nextTask()">Task Complete</button>
+    </div>
   </main>
+  <script src="tasks.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
