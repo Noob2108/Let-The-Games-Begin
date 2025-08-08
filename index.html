@@ -3,62 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1e1e2f" />
+  <meta name="theme-color" content="#130718" />
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
   <title>Carnal Protocol</title>
 </head>
 <body>
-  <main id="app">
-    <h1>Carnal Protocol</h1>
+  <main id="app" class="hud-wrap">
+    <header class="hud-header">
+      <h1 class="title">Carnal Protocol</h1>
+    </header>
 
-    <!-- Step 1: Couple type selection -->
-    <div id="coupleTypeStep">
-      <h3>Select Couple Type</h3>
-      <select id="coupleType">
-        <option value="">-- Choose Couple Type --</option>
-        <option value="mf">Male / Female</option>
-        <option value="mm">Male / Male</option>
-        <option value="ff">Female / Female</option>
-      </select>
-      <button onclick="goToSetup()">Start</button>
-    </div>
+    <!-- Step 1: Couple type -->
+    <section id="coupleTypeStep" class="card">
+      <div class="card-body">
+        <h3 class="card-title">Select Couple Type</h3>
+        <select id="coupleType" class="input">
+          <option value="">-- Choose Couple Type --</option>
+          <option value="mf">Male / Female</option>
+          <option value="mm">Male / Male</option>
+          <option value="ff">Female / Female</option>
+        </select>
+        <button class="btn btn-primary" onclick="goToSetup()">Start</button>
+      </div>
+    </section>
 
-    <!-- Step 2: Game setup -->
-    <div id="setup" style="display:none;">
-      <div id="nameInputs"></div>
+    <!-- Step 2: Setup -->
+    <section id="setup" class="card" style="display:none;">
+      <button id="backBtn" class="back-btn" onclick="goBack()" aria-label="Back">⟵</button>
+      <div class="card-body">
+        <div id="nameInputs" class="grid"></div>
 
-      <select id="mode">
-        <option value="standard">Standard Mode</option>
-        <option value="blitz">Bedroom Blitz</option>
-      </select>
+        <div class="grid">
+          <label class="stack">
+            <span class="label">Mode</span>
+            <select id="mode" class="input">
+              <option value="standard">Standard Mode</option>
+              <option value="blitz">Bedroom Blitz</option>
+            </select>
+          </label>
 
-      <select id="intensity">
-        <option value="tease">Tease</option>
-        <option value="dirty">Dirty</option>
-        <option value="carnal">Carnal Protocol</option>
-      </select>
+          <label class="stack">
+            <span class="label">Intensity</span>
+            <select id="intensity" class="input">
+              <option value="tease">Tease</option>
+              <option value="dirty">Dirty</option>
+              <option value="carnal">Carnal Protocol</option>
+            </select>
+          </label>
+        </div>
 
-      <h3>Kink Toggles</h3>
-      <label><input type="checkbox" id="bondage" checked> Bondage/Restraints</label><br>
-      <label><input type="checkbox" id="toys" checked> Toys/Vibrators</label><br>
-      <label><input type="checkbox" id="anal" checked> Anal Play</label><br>
-      <label><input type="checkbox" id="edging" checked> Edging/Orgasm Control</label><br>
-      <label><input type="checkbox" id="public" checked> Public Risk</label><br>
+        <h3 class="card-subtitle">Kink Toggles</h3>
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" id="bondage" checked> Bondage/Restraints</label>
+          <label class="toggle"><input type="checkbox" id="toys" checked> Toys/Vibrators</label>
+          <label class="toggle"><input type="checkbox" id="anal" checked> Anal Play</label>
+          <label class="toggle"><input type="checkbox" id="edging" checked> Edging/Orgasm Control</label>
+          <label class="toggle"><input type="checkbox" id="public" checked> Public Risk</label>
+        </div>
 
-      <h3>Number of Rounds</h3>
-      <input type="number" id="roundCount" min="1" max="25" value="10" />
+        <div class="grid">
+          <label class="stack">
+            <span class="label">Number of Rounds</span>
+            <input type="number" id="roundCount" class="input" min="1" max="25" value="10" />
+          </label>
+        </div>
 
-      <button onclick="startGame()">Start</button>
-    </div>
+        <button class="btn btn-primary big" onclick="startGame()">Start</button>
+      </div>
+    </section>
 
-    <!-- Step 3: Game Area -->
-    <div id="gameArea" style="display:none;">
-      <h2 id="taskTitle"></h2>
-      <p id="taskText"></p>
-      <p id="timer"></p>
-      <button onclick="nextTask()">Task Complete</button>
-    </div>
+    <!-- Step 3: Game -->
+    <section id="gameArea" class="card" style="display:none;">
+      <div class="card-body">
+        <h2 id="taskTitle" class="card-title"></h2>
+        <p id="taskText" class="task-text"></p>
+        <button class="btn btn-accent" onclick="nextTask()">Task Complete</button>
+      </div>
+    </section>
+
+    <footer class="hud-footer">
+      <div class="ring pulse"></div>
+      <div class="ring ring2"></div>
+    </footer>
   </main>
 
   <script src="tasks.js"></script>
