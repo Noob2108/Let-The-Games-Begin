@@ -32,67 +32,87 @@ function generateTasks(mode, intensity, p1, p2, coupleType) {
   saveKinkSettings();
 
   const allowBondage = document.getElementById('bondage').checked;
-  const allowToys = document.getElementById('toys').checked;
-  const allowAnal = document.getElementById('anal').checked;
-  const allowEdging = document.getElementById('edging').checked;
-  const allowPublic = document.getElementById('public').checked;
+  const allowToys    = document.getElementById('toys').checked;
+  const allowAnal    = document.getElementById('anal').checked;
+  const allowEdging  = document.getElementById('edging').checked;
+  const allowPublic  = document.getElementById('public').checked;
 
-  // Assign pronouns based on couple type
-  let p1Pronoun = { subj: "they", obj: "them", poss: "their" };
-  let p2Pronoun = { subj: "they", obj: "them", poss: "their" };
+  const P = {
+    mf: [{subj:'he', obj:'him', poss:'his'}, {subj:'she', obj:'her', poss:'her'}],
+    mm: [{subj:'he', obj:'him', poss:'his'}, {subj:'he', obj:'him', poss:'his'}],
+    ff: [{subj:'she', obj:'her', poss:'her'}, {subj:'she', obj:'her', poss:'her'}]
+  }[coupleType || 'mf'];
+  const p1p = P[0], p2p = P[1];
 
-  if (coupleType === 'mf') {
-    p1Pronoun = { subj: "he", obj: "him", poss: "his" };
-    p2Pronoun = { subj: "she", obj: "her", poss: "her" };
-  } else if (coupleType === 'mm') {
-    p1Pronoun = { subj: "he", obj: "him", poss: "his" };
-    p2Pronoun = { subj: "he", obj: "him", poss: "his" };
-  } else if (coupleType === 'ff') {
-    p1Pronoun = { subj: "she", obj: "her", poss: "her" };
-    p2Pronoun = { subj: "she", obj: "her", poss: "her" };
+  const standardCommon = [
+    `${p1}, slowly undress ${p2} one item at a time, kissing exposed skin as you go.`,
+    `${p2}, sit on ${p1}'s lap and grind for 5 minutes — no penetration.`,
+    `${p1}, blindfold ${p2} and explore ${p2p.poss} body with your mouth.`,
+    allowPublic ? `${p2}, tease ${p1} somewhere with a little risk of being seen.` : null,
+    `${p1}, give ${p2} a slow lap dance with roaming hands.`,
+  ];
+  const blitzCommon = [
+    `${p1}, sit ${p2} on the edge of the bed blindfolded and tease with your mouth for 7 minutes (light only).`,
+    `${p2}, straddle ${p1} and use your hips to grind ${p1p.obj} right to the edge.`,
+    `${p1}, worship ${p2}'s body with your mouth from neck to thighs.`
+  ];
+
+  // Couple‑specific
+  const standardMF = [
+    `${p1} (male), pin ${p2} (female) against the wall and kiss ${p2p.obj} breathless.`,
+    allowToys ? `${p2} (female), use a vibrator while ${p1} (male) watches from arm’s length.` : null,
+  ];
+  const blitzMF = [
+    `${p2} (female), ride ${p1} (male)'s face for 10 minutes while holding ${p1p.poss} head in place.`,
+    `${p1} (male), press ${p2} (female) against the wall and lick ${p2p.obj} out — no orgasm allowed.`
+  ];
+  const standardMM = [
+    `${p1} (male), hold ${p2} (male) close and grind until ${p2p.subj} can’t stand still.`,
+    allowBondage ? `${p2} (male), cuff ${p1} (male)'s wrists and make ${p1p.obj} beg before any touch.` : null,
+  ];
+  const blitzMM = [
+    `${p2} (male), get on your knees and take care of ${p1} (male) with your mouth — slow, controlled.`,
+    allowAnal ? `${p1} (male), tease ${p2} (male) anally with lube and patience.` : null
+  ];
+  const standardFF = [
+    `${p1} (female), kiss the back of ${p2} (female)'s neck while your hands explore under ${p2p.poss} shirt.`,
+    allowToys ? `${p2} (female), use a wand on ${p1} (female) while whispering what you want next.` : null,
+  ];
+  const blitzFF = [
+    `${p2} (female), sit on ${p1} (female)'s face and control the pace with your thighs.`,
+    `${p1} (female), hold ${p2} (female) down gently and lick ${p2p.obj} until ${p2p.subj} begs.`
+  ];
+
+  let deck = [];
+  if (mode === 'standard') {
+    deck = standardCommon.concat(
+      coupleType === 'mm' ? standardMM :
+      coupleType === 'ff' ? standardFF : standardMF
+    );
+  } else {
+    deck = blitzCommon.concat(
+      coupleType === 'mm' ? blitzMM :
+      coupleType === 'ff' ? blitzFF : blitzMF
+    );
   }
 
-  const standardTasks = [
-    `${p1}, slowly unbutton ${p2}'s clothes one at a time, kissing exposed skin as you go.`,
-    `${p2}, sit on ${p1}'s lap and grind for 5 minutes — no penetration allowed.`,
-    `${p1}, blindfold ${p2} and tease every inch of ${p2Pronoun.poss} body with your mouth.`,
-    allowBondage ? `${p2}, tie ${p1}'s hands and make ${p1Pronoun.obj} watch you touch yourself.` : null,
-    `${p2}, straddle ${p1} and whisper every filthy thing you want ${p1Pronoun.obj} to do.`,
-    `${p1}, kiss ${p2} deeply, pinning ${p2Pronoun.poss} wrists above ${p2Pronoun.poss} head.`,
-    `${p2}, make ${p1} beg before ${p1Pronoun.subj} gets to touch you.`,
-    allowToys ? `${p1}, use a vibrator on ${p2} until ${p2Pronoun.subj} can't think straight.` : null,
-    allowPublic ? `${p2}, grind against ${p1} somewhere with the risk of being seen.` : null,
-    `${p1}, give ${p2} a lap dance with your hands roaming everywhere.`,
-    allowAnal ? `${p2}, tease ${p1}'s ass while you kiss ${p1Pronoun.obj} deeply.` : null
-  ];
-
-  const blitzTasks = [
-    `${p1}, sit ${p2} on the edge of the bed blindfolded and slowly lick and suck — only lightly — for 7 minutes.`,
-    `${p2}, ride ${p1}'s face for 10 minutes while holding ${p1Pronoun.poss} head in place.`,
-    `${p1}, press ${p2} against the wall and lick ${p2Pronoun.obj} out for 7 minutes — no orgasm allowed.`,
-    allowToys ? `${p2}, use a toy on ${p1}'s most sensitive spots without letting ${p1Pronoun.obj} finish.` : null,
-    `${p1}, finger ${p2} slow and deep, stopping every time ${p2Pronoun.subj} moans too loud.`,
-    `${p2}, straddle ${p1} and use your hips to grind ${p1Pronoun.obj} to the edge.`,
-    `${p1}, worship ${p2}'s body with your mouth, moving from neck to thighs.`,
-    allowBondage ? `${p2}, tie ${p1} to the bed and tease ${p1Pronoun.obj} until ${p1Pronoun.subj} begs.` : null,
-    allowEdging ? `${p1}, edge ${p2} three times before letting ${p2Pronoun.obj} finish.` : null,
-    allowAnal ? `${p2}, take ${p1} anally while holding ${p1Pronoun.poss} hands down.` : null
-  ];
-
-  let selected = mode === 'standard' ? standardTasks : blitzTasks;
+  if (allowBondage) deck.push(`${p2}, tie ${p1}'s hands and make ${p1p.obj} watch you touch yourself.`);
+  if (allowToys) deck.push(`${p1}, use a toy on ${p2} until ${p2p.subj} can’t think straight.`);
+  if (allowEdging) deck.push(`${p1}, edge ${p2} three times before letting ${p2p.obj} finish.`);
+  if (allowAnal) deck.push(`${p2}, tease ${p1} anally while kissing ${p1p.obj} deeply.`);
 
   if (intensity === 'dirty') {
-    selected.push(
+    deck.push(
       `${p1}, give ${p2} a deep, dirty kiss and use your hands freely.`,
       `${p2}, grind against ${p1} for 5 minutes without penetration.`
     );
   } else if (intensity === 'carnal') {
-    if (allowEdging) selected.push(`${p1}, edge ${p2} repeatedly for 10 minutes — ${p2Pronoun.subj}’re not allowed to finish.`);
-    selected.push(`${p2}, ride ${p1} until ${p1Pronoun.subj}’s begging you to stop — but don’t.`);
-    if (allowBondage) selected.push(`${p1}, tie ${p2} up and use your mouth, toys, and hands until ${p2Pronoun.subj} can’t speak.`);
+    if (allowEdging) deck.push(`${p1}, edge ${p2} for 10 minutes — ${p2p.subj} may not finish.`);
+    deck.push(`${p2}, take control and make ${p1} beg for it.`);
+    if (allowBondage) deck.push(`${p1}, bind ${p2} and use mouth, hands, and toys until ${p2p.subj} can’t speak.`);
   }
 
-  return shuffleArray(selected.filter(task => task !== null));
+  return shuffleArray(deck.filter(Boolean));
 }
 
 window.onload = loadKinkSettings;
