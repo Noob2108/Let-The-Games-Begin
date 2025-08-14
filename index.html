@@ -1,487 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Carnal Protocol — Deluxe</title>
-  <meta name="theme-color" content="#0b0e13">
-  <meta name="description" content="Carnal Protocol — Deluxe: Standard, Bedroom Blitz, and Dirty Dice (Foreplay & Kamasutra). PWA for consenting adults.">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="assets/icon-192.png">
-  <style>
-    :root{
-      --bg:#0a0d14; --panel:#111729; --muted:#9fb2d9;
-      --accent:#7a4cff; --accent2:#00e7ff; --dice:#121a2e;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;color:#e7eeff;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(122,76,255,.18), transparent 50%),
-        radial-gradient(900px 500px at -10% 120%, rgba(0,231,255,.12), transparent 60%),
-        var(--bg);
-    }
-    .container{max-width:1000px;margin:0 auto;padding:18px 14px 40px;display:flex;flex-direction:column;gap:16px}
-    header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.25), inset 0 0 60px rgba(122,76,255,.08);backdrop-filter:blur(8px);
-    }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:42px;height:42px;border-radius:12px}
-    h1{font-size:18px;margin:0;letter-spacing:.3px}
-    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px}
-    @media (min-width:900px){ .grid{grid-template-columns: 320px 1fr} }
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;padding:14px;box-shadow:0 8px 40px rgba(0,0,0,.25), inset 0 0 60px rgba(0,231,255,.06);
-    }
-    .card h2{margin:0 0 8px;font-size:16px;color:#dbe6ff;letter-spacing:.2px}
-    .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .sub{font-size:12px;color:var(--muted)}
-    button{
-      appearance:none;cursor:pointer;border:none;border-radius:14px;padding:12px 16px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#0a0c12;font-weight:700;letter-spacing:.4px;box-shadow:0 8px 30px rgba(0,231,255,.25);
-    }
-    button.secondary{background:transparent;color:#d0dcff;border:1px solid rgba(255,255,255,.14)}
-    select,input[type="text"],textarea{
-      width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);
-      background:#0e1220;color:#eaf2ff;outline:none;
-    }
-    .pill{display:flex;align-items:center;justify-content:space-between;background:#0f1220;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:8px 10px}
-    .toggle{appearance:none;width:46px;height:26px;background:#2a3247;border-radius:999px;position:relative;outline:none;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
-    .toggle:checked{background: linear-gradient(90deg,var(--accent),var(--accent2))}
-    .toggle::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;top:2.5px;left:3px;background:#fff;transition:transform .2s ease}
-    .toggle:checked::after{transform:translateX(20px)}
-    .hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:10px 0}
-    .hidden{display:none !important}
-    /* Dirty Dice */
-    .dice-wrap{display:flex;gap:14px;align-items:center;justify-content:flex-start;margin:10px 0}
-    .die{width:72px;height:72px;background:var(--dice);border-radius:14px;border:1px solid rgba(255,255,255,.12);position:relative;box-shadow:0 6px 24px rgba(122,76,255,.25), inset 0 0 30px rgba(122,76,255,.1)}
-    .pip{width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;opacity:.95}
-    .roll-anim{animation: roll 1.6s ease-in-out}
-    @keyframes roll{
-      0%{transform:translateY(0) rotate(0deg)}
-      20%{transform:translateY(-18px) rotate(90deg)}
-      40%{transform:translateY(0) rotate(180deg)}
-      60%{transform:translateY(-10px) rotate(270deg)}
-      100%{transform:translateY(0) rotate(360deg)}
-    }
-    .kama-img{width:180px;height:140px;border-radius:12px;border:1px solid rgba(255,255,255,.12);object-fit:cover;background:#0e1220}
-    .editor{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-    .editor .cell{background:#0f1220;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px}
-    footer{color:#8193b6;text-align:center;font-size:12px;margin-top:8px}
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#130718" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Carnal Protocol</title>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <img alt="icon" src="assets/icon-192.png">
-        <div>
-          <h1>Carnal Protocol — Deluxe</h1>
-          <div class="sub">Standard • Bedroom Blitz • Dirty Dice</div>
-        </div>
-      </div>
-      <span class="chip">18+ CONSENTING ADULTS</span>
+  <main id="app" class="hud-wrap">
+    <header class="hud-header">
+      <h1 class="title">Carnal Protocol</h1>
     </header>
 
-    <div class="grid">
-      <!-- LEFT: Menu & Settings -->
-      <section class="card" id="menu">
-        <h2>Main Menu</h2>
-        <div class="row" style="gap:8px">
-          <button id="btnStandard">Standard</button>
-          <button id="btnBlitz">Bedroom Blitz</button>
-          <button id="btnDirty">Dirty Dice</button>
-        </div>
-        <div class="hr"></div>
-        <div class="sub">Dirty Dice has two sub-modes: <b>Foreplay</b> (editable) & <b>Kamasutra</b> (locked with illustrations).</div>
+    <!-- Step 1: Couple type -->
+    <section id="coupleTypeStep" class="card">
+      <div class="card-body">
+        <h3 class="card-title">Select Couple Type</h3>
+        <select id="coupleType" class="input">
+          <option value="">-- Choose Couple Type --</option>
+          <option value="mf">Male / Female</option>
+          <option value="mm">Male / Male</option>
+          <option value="ff">Female / Female</option>
+        </select>
+        <button class="btn btn-primary" onclick="goToSetup()">Start</button>
+      </div>
+    </section>
 
-        <div class="hr"></div>
-        <h2>Voice</h2>
-        <div class="pill"><label>Enable Speak button</label><input id="voiceOn" class="toggle" type="checkbox"></div>
-        <div class="pill">
-          <label>Voice</label>
-          <select id="voiceSelect"></select>
-        </div>
-        <div class="sub">Voice never auto-plays. Tap <b>Speak</b> after a roll.</div>
-      </section>
+    <!-- Step 2: Setup -->
+    <section id="setup" class="card" style="display:none;">
+      <button id="backBtn" class="back-btn" onclick="goBack()" aria-label="Back">⟵</button>
+      <div class="card-body">
+        <div id="nameInputs" class="grid"></div>
 
-      <!-- RIGHT: Game Panel -->
-      <section class="card">
-        <div id="modeChooser">
-          <h2>Choose Mode</h2>
-          <div class="row" style="gap:8px">
-            <button id="goStandard">Standard</button>
-            <button id="goBlitz">Bedroom Blitz</button>
-            <button id="goDirty">Dirty Dice</button>
+        <div class="grid">
+          <label class="stack">
+            <span class="label">Mode</span>
+            <select id="mode" class="input">
+              <option value="standard">Standard Mode</option>
+              <option value="blitz">Bedroom Blitz</option>
+              <option value="dice">Dirty Dice</option>
+            </select>
+          </label>
+
+          <label class="stack">
+            <span class="label">Intensity</span>
+            <select id="intensity" class="input">
+              <option value="tease">Tease</option>
+              <option value="dirty">Dirty</option>
+              <option value="carnal">Carnal Protocol</option>
+            </select>
+          </label>
+        </div>
+
+        <h3 class="card-subtitle">Kink Toggles</h3>
+        <div class="toggles">
+          <label class="toggle"><input type="checkbox" id="bondage" checked> Bondage/Restraints</label>
+          <label class="toggle"><input type="checkbox" id="toys" checked> Toys/Vibrators</label>
+          <label class="toggle"><input type="checkbox" id="anal" checked> Anal Play</label>
+          <label class="toggle"><input type="checkbox" id="edging" checked> Edging/Orgasm Control</label>
+          <label class="toggle"><input type="checkbox" id="public" checked> Public Risk</label>
+        </div>
+
+        <div class="grid">
+          <label class="stack">
+            <span class="label">Number of Rounds (not used in Dice)</span>
+            <input type="number" id="roundCount" class="input" min="1" max="25" value="10" />
+          </label>
+        </div>
+
+        <button class="btn btn-primary big" onclick="startGame()">Start</button>
+      </div>
+    </section>
+
+    <!-- Step 3A: Task Game -->
+    <section id="gameArea" class="card" style="display:none;">
+      <div class="card-body">
+        <h2 id="taskTitle" class="card-title"></h2>
+        <p id="taskText" class="task-text"></p>
+        <button class="btn btn-accent" onclick="nextTask()">Task Complete</button>
+      </div>
+    </section>
+
+    <!-- Step 3B: Dirty Dice -->
+    <section id="diceArea" class="card" style="display:none;">
+      <div class="card-body">
+        <div class="row-top">
+          <h2 class="card-title">Dirty Dice</h2>
+          <div class="row-controls">
+            <button id="diceToForeplay" class="btn btn-primary">Foreplay</button>
+            <button id="diceToKama" class="btn btn-primary">Kamasutra</button>
+            <button id="diceBack" class="btn secondary">Back</button>
           </div>
-          <div class="hr"></div>
-          <div class="sub">Tap Dirty Dice to open <b>Foreplay</b> or <b>Kamasutra</b>.</div>
         </div>
 
-        <!-- Dirty Dice Sub-Menu -->
-        <div id="dirtyMenu" class="hidden">
-          <h2>Dirty Dice</h2>
-          <div class="row" style="gap:8px">
-            <button id="ddForeplayBtn">Foreplay</button>
-            <button id="ddKamaBtn">Kamasutra</button>
-            <button class="secondary" id="backToMain">Back</button>
-          </div>
-          <div class="hr"></div>
-          <div class="sub">Two dice roll → total maps to a task or position (2–12). No repeats until cycle ends.</div>
-        </div>
+        <!-- Submenu note -->
+        <p class="sub" style="margin:6px 0 12px">Roll two dice (2–12). Foreplay is editable. Kamasutra shows a classy silhouette.</p>
 
-        <!-- Dirty Dice: Foreplay -->
-        <div id="ddForeplay" class="hidden">
-          <div class="row" style="justify-content:space-between">
-            <h2>Dirty Dice — Foreplay</h2>
-            <div class="row" style="gap:8px">
-              <button id="editForeplay" class="secondary">Manage Tasks</button>
-              <button id="resetForeplay" class="secondary">Reset</button>
-            </div>
-          </div>
-
+        <!-- Foreplay -->
+        <div id="diceForeplay" class="hidden">
           <div class="dice-wrap">
             <div id="dieA" class="die"></div>
             <div id="dieB" class="die"></div>
           </div>
-
-          <div class="result" style="margin-top:8px">
+          <div class="result">
             <div id="ddFLabel" class="sub">Ready? Tap Roll.</div>
             <div id="ddFTask" class="big"></div>
           </div>
-          <div class="row" style="gap:8px;margin-top:8px">
-            <button id="ddFRoll">🎲 Roll</button>
-            <button id="ddFSpeak" class="secondary">🔊 Speak</button>
-            <button id="ddFBack" class="secondary">Back</button>
+          <div class="row-controls">
+            <button id="ddFRoll" class="btn btn-primary">🎲 Roll</button>
+            <button id="editForeplay" class="btn secondary">Manage Tasks</button>
+            <button id="resetForeplay" class="btn secondary">Reset</button>
           </div>
 
-          <!-- Editor Modal (simple inline) -->
-          <div id="editorWrap" class="hidden" style="margin-top:12px">
+          <!-- Inline editor -->
+          <div id="editorWrap" class="hidden editor-shell">
             <div class="hr"></div>
-            <h3>Edit Foreplay Tasks (2–12)</h3>
+            <h3 class="card-subtitle">Edit Foreplay Tasks (2–12)</h3>
             <div class="editor" id="editorGrid"></div>
-            <div class="row" style="gap:8px;margin-top:8px">
-              <button id="saveForeplay">Save</button>
-              <button id="cancelForeplay" class="secondary">Cancel</button>
+            <div class="row-controls">
+              <button id="saveForeplay" class="btn btn-primary">Save</button>
+              <button id="cancelForeplay" class="btn secondary">Cancel</button>
             </div>
           </div>
         </div>
 
-        <!-- Dirty Dice: Kamasutra -->
-        <div id="ddKama" class="hidden">
-          <div class="row" style="justify-content:space-between">
-            <h2>Dirty Dice — Kamasutra</h2>
-            <button id="ddKBack" class="secondary">Back</button>
-          </div>
-
+        <!-- Kamasutra -->
+        <div id="diceKama" class="hidden">
           <div class="dice-wrap">
             <div id="dieKA" class="die"></div>
             <div id="dieKB" class="die"></div>
           </div>
-
-          <div class="result" style="margin-top:8px;display:flex;align-items:center;gap:12px">
+          <div class="kama-row">
             <img id="kamaImg" class="kama-img" alt="Kamasutra illustration"/>
             <div>
               <div id="ddKLabel" class="sub">Ready? Tap Roll.</div>
               <div id="ddKTask" class="big"></div>
             </div>
           </div>
-          <div class="row" style="gap:8px;margin-top:8px">
-            <button id="ddKRoll">🎲 Roll</button>
-            <button id="ddKSpeak" class="secondary">🔊 Speak</button>
-            <button id="ddKBack2" class="secondary">Back</button>
+          <div class="row-controls">
+            <button id="ddKRoll" class="btn btn-primary">🎲 Roll</button>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Simple placeholders for Standard/Blitz -->
-        <div id="standard" class="hidden">
-          <h2>Standard (placeholder)</h2>
-          <div class="result"><div class="big">Use Dirty Dice for now. (Standard/Blitz can be dropped in later.)</div></div>
-          <div class="row" style="gap:8px;margin-top:8px">
-            <button id="stdBack" class="secondary">Back</button>
-          </div>
-        </div>
-
-        <div id="blitz" class="hidden">
-          <h2>Bedroom Blitz (placeholder)</h2>
-          <div class="result"><div class="big">Use Dirty Dice for now. (Standard/Blitz can be dropped in later.)</div></div>
-          <div class="row" style="gap:8px;margin-top:8px">
-            <button id="blitzBack" class="secondary">Back</button>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <footer>
-      Built for playful, consenting adults. No minors. No humiliation or pain.
+    <footer class="hud-footer">
+      <div class="ring pulse"></div>
+      <div class="ring ring2"></div>
     </footer>
-  </div>
+  </main>
 
-  <script>
-    // ---------- Voice ----------
-    const voiceOn = document.getElementById('voiceOn');
-    const voiceSelect = document.getElementById('voiceSelect');
-    let voices = [];
-    function loadVoices(){
-      voices = speechSynthesis.getVoices();
-      voiceSelect.innerHTML = voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('');
-    }
-    if ('speechSynthesis' in window) {
-      speechSynthesis.onvoiceschanged = loadVoices;
-      loadVoices();
-    }
-    function speak(text){
-      if(!voiceOn.checked) return;
-      try{
-        speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(text);
-        const idx = parseInt(voiceSelect.value,10);
-        if(voices[idx]) u.voice = voices[idx];
-        u.rate = 1; u.pitch = 1;
-        speechSynthesis.speak(u);
-      }catch(e){}
-    }
-
-    // ---------- Simple Nav helpers ----------
-    const show = id => document.getElementById(id).classList.remove('hidden');
-    const hide = id => document.getElementById(id).classList.add('hidden');
-    function only(ids, showId){
-      ids.forEach(i => (i===showId?show(i):hide(i)));
-    }
-
-    // ---------- Menu wiring ----------
-    const modeIds = ['modeChooser','dirtyMenu','ddForeplay','ddKama','standard','blitz'];
-    document.getElementById('goDirty').onclick = ()=> only(modeIds,'dirtyMenu');
-    document.getElementById('goStandard').onclick = ()=> only(modeIds,'standard');
-    document.getElementById('goBlitz').onclick = ()=> only(modeIds,'blitz');
-    document.getElementById('btnDirty').onclick = ()=> only(modeIds,'dirtyMenu');
-    document.getElementById('btnStandard').onclick = ()=> only(modeIds,'standard');
-    document.getElementById('btnBlitz').onclick = ()=> only(modeIds,'blitz');
-
-    document.getElementById('backToMain').onclick = ()=> only(modeIds,'modeChooser');
-    document.getElementById('ddFBack').onclick = ()=> only(modeIds,'dirtyMenu');
-    document.getElementById('ddKBack').onclick = ()=> only(modeIds,'dirtyMenu');
-    document.getElementById('ddKBack2').onclick = ()=> only(modeIds,'dirtyMenu');
-    document.getElementById('stdBack').onclick = ()=> only(modeIds,'modeChooser');
-    document.getElementById('blitzBack').onclick = ()=> only(modeIds,'modeChooser');
-
-    document.getElementById('ddForeplayBtn').onclick = ()=> only(modeIds,'ddForeplay');
-    document.getElementById('ddKamaBtn').onclick = ()=> only(modeIds,'ddKama');
-
-    // ---------- Dice rendering ----------
-    function renderDie(el, val){
-      el.innerHTML = '';
-      el.classList.remove('roll-anim');
-      void el.offsetWidth; // reflow to restart animation
-      el.classList.add('roll-anim');
-      const spots = {
-        1:[[50,50]],
-        2:[[25,25],[75,75]],
-        3:[[25,25],[50,50],[75,75]],
-        4:[[25,25],[75,25],[25,75],[75,75]],
-        5:[[25,25],[75,25],[50,50],[25,75],[75,75]],
-        6:[[25,25],[75,25],[25,50],[75,50],[25,75],[75,75]]
-      };
-      const p = spots[val];
-      p.forEach(([x,y])=>{
-        const d = document.createElement('div');
-        d.className='pip';
-        d.style.left = `calc(${x}% - 6px)`;
-        d.style.top  = `calc(${y}% - 6px)`;
-        el.appendChild(d);
-      });
-    }
-
-    // ---------- No-repeat cycle helper ----------
-    function makeCycler(list){
-      let pool = list.slice();
-      let last = null;
-      return function next(){
-        if(pool.length===0) pool = list.slice();
-        // avoid immediate repeats
-        let choice;
-        for(let i=0;i<10;i++){
-          choice = pool[Math.floor(Math.random()*pool.length)];
-          if(choice !== last) break;
-        }
-        pool.splice(pool.indexOf(choice),1);
-        last = choice;
-        return choice;
-      }
-    }
-
-    // ---------- Dirty Dice: Foreplay (editable) ----------
-    const ddFRollBtn = document.getElementById('ddFRoll');
-    const ddFSpeakBtn = document.getElementById('ddFSpeak');
-    const ddFTask = document.getElementById('ddFTask');
-    const ddFLabel = document.getElementById('ddFLabel');
-    const dieA = document.getElementById('dieA');
-    const dieB = document.getElementById('dieB');
-
-    const defaultForeplay = {
-      2: "Sit them on a chair, straddle their lap, and grind slowly while kissing deeply for 3 minutes.",
-      3: "Blindfold them and drag your tongue from collarbone to ear; whisper exactly what you want to do next.",
-      4: "Kiss and tease their nipples for 2 minutes; keep your other hand hovering just above their underwear.",
-      5: "Pull underwear aside and blow warm air over their hottest spot before one slow lick. Repeat—no more than 10s at a time.",
-      6: "Lick and suck their inner thighs for 3 minutes, alternating sides, never touching center.",
-      7: "Pin them down and kiss from neck to hips, stopping just before their favorite spot every time.",
-      8: "Trace circles over their nipples with your tongue, then trail kisses down their stomach—stop before going further.",
-      9: "Have them lie flat while you straddle their chest, hovering your lips over theirs without fully kissing.",
-      10:"Suck their fingers one by one, slow and filthy, while holding unbroken eye contact.",
-      11:"Press them against a wall, grind lightly, and whisper the dirtiest thing you can think of.",
-      12:"Lay them back, sit over their thighs, and give a slow, teasing lap dance—no touching allowed."
-    };
-    function loadForeplay(){
-      try{
-        const s = localStorage.getItem('cp_dd_foreplay');
-        if(!s) return {...defaultForeplay};
-        const obj = JSON.parse(s);
-        return {...defaultForeplay, ...obj};
-      }catch(e){ return {...defaultForeplay}; }
-    }
-    function saveForeplay(map){ localStorage.setItem('cp_dd_foreplay', JSON.stringify(map)); }
-    function resetForeplay(){ localStorage.removeItem('cp_dd_foreplay'); foreplayMap = loadForeplay(); setupForeplayEditor(); }
-
-    let foreplayMap = loadForeplay();
-    let foreplayCycler = makeCycler(Object.keys(foreplayMap).map(Number));
-
-    function rollForeplay(){
-      // animate dice, resolve values, then show mapped task
-      const a = 1 + Math.floor(Math.random()*6);
-      const b = 1 + Math.floor(Math.random()*6);
-      renderDie(dieA, a);
-      renderDie(dieB, b);
-      const total = a + b;
-      ddFLabel.textContent = `Roll: ${a} + ${b} = ${total}`;
-      // use cycler to avoid immediate repeat totals; but prefer actual total:
-      // if total equals previous, we still show it — but task differs because mapping is per-total.
-      const task = foreplayMap[total] || "Freestyle: combine two foreplay actions of your choice for 2–3 minutes.";
-      ddFTask.textContent = task;
-      return task;
-    }
-
-    ddFRollBtn.onclick = rollForeplay;
-    ddFSpeakBtn.onclick = ()=> speak(ddFTask.textContent||"");
-
-    // Editor
-    const editorWrap = document.getElementById('editorWrap');
-    const editorGrid = document.getElementById('editorGrid');
-    function setupForeplayEditor(){
-      editorGrid.innerHTML = '';
-      for(let t=2;t<=12;t++){
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.innerHTML = `<div class="sub" style="margin-bottom:6px">Dice Total: <b>${t}</b></div>
-          <textarea rows="4" data-total="${t}">${foreplayMap[t]||''}</textarea>`;
-        editorGrid.appendChild(cell);
-      }
-    }
-    setupForeplayEditor();
-
-    document.getElementById('editForeplay').onclick = ()=> editorWrap.classList.remove('hidden');
-    document.getElementById('cancelForeplay').onclick = ()=> editorWrap.classList.add('hidden');
-    document.getElementById('resetForeplay').onclick = ()=> { resetForeplay(); ddFTask.textContent=''; ddFLabel.textContent='Reset complete.'; };
-    document.getElementById('saveForeplay').onclick = ()=>{
-      const ta = editorGrid.querySelectorAll('textarea');
-      ta.forEach(el => { foreplayMap[parseInt(el.dataset.total,10)] = el.value.trim(); });
-      saveForeplay(foreplayMap);
-      editorWrap.classList.add('hidden');
-      ddFLabel.textContent = 'Saved.';
-    };
-
-    // ---------- Dirty Dice: Kamasutra (locked with illustrations) ----------
-    const ddKRollBtn = document.getElementById('ddKRoll');
-    const ddKSpeakBtn = document.getElementById('ddKSpeak');
-    const ddKTask = document.getElementById('ddKTask');
-    const ddKLabel = document.getElementById('ddKLabel');
-    const kamaImg = document.getElementById('kamaImg');
-    const dieKA = document.getElementById('dieKA');
-    const dieKB = document.getElementById('dieKB');
-
-    // Classy illustrated vector images as data-URIs (silhouette/manual hybrid).
-    // You can replace any value with your own URL later.
-    const SVG = (name, path) =>
-      `data:image/svg+xml;utf8,` +
-      encodeURIComponent(`<?xml version="1.0" encoding="UTF-8"?>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240">
-        <defs>
-          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#c53eff"/><stop offset="1" stop-color="#00e7ff"/>
-          </linearGradient>
-        </defs>
-        <rect width="320" height="240" fill="#0d1222"/>
-        <g fill="url(#g)" opacity="0.9">
-          ${path}
-        </g>
-        <text x="16" y="220" fill="#dbe6ff" font-family="sans-serif" font-size="18">${name}</text>
-      </svg>`);
-
-    // Simple tasteful silhouettes (not explicit) to keep the style classy.
-    const KAMA_IMAGES = {
-      "Missionary": SVG("Missionary", `<path d="M40,160 q40,-60 100,-60 q60,0 100,60 l-20,10 q-40,-40 -80,-40 q-40,0 -80,40z"/><circle cx="110" cy="90" r="18"/>`),
-      "Cowgirl": SVG("Cowgirl", `<path d="M160,80 q40,20 40,60 q0,40 -40,60 q-40,-20 -40,-60 q0,-40 40,-60z"/><circle cx="160" cy="70" r="16"/><path d="M80,170 q40,-30 80,-30 q40,0 80,30" />`),
-      "Reverse Cowgirl": SVG("Reverse Cowgirl", `<path d="M160,86 q38,20 38,56 q0,36 -38,56 q-38,-20 -38,-56 q0,-36 38,-56z"/><circle cx="160" cy="78" r="14"/><path d="M70,176 q45,-35 90,-35 q45,0 90,35" />`),
-      "Doggy Style": SVG("Doggy Style", `<path d="M60,160 h60 l20,-30 h60 l20,30 h40" /><circle cx="80" cy="140" r="12"/><circle cx="240" cy="140" r="12"/>`),
-      "Lotus": SVG("Lotus", `<path d="M160,120 q50,10 70,60 q-40,20 -70,20 q-30,0 -70,-20 q20,-50 70,-60z"/><circle cx="160" cy="110" r="16"/>`),
-      "Standing": SVG("Standing", `<rect x="140" y="80" width="40" height="90" rx="10"/><circle cx="160" cy="70" r="14"/><path d="M140,170 q20,10 40,0" />`),
-      "Spooning": SVG("Spooning", `<path d="M80,150 q40,-30 80,-30 q40,0 80,30 q-40,30 -80,30 q-40,0 -80,-30z"/><circle cx="90" cy="140" r="12"/><circle cx="230" cy="140" r="12"/>`),
-      "Bridge": SVG("Bridge", `<path d="M60,170 q50,-70 100,-70 q50,0 100,70" /><circle cx="160" cy="92" r="12"/>`),
-      "Butterfly": SVG("Butterfly", `<path d="M100,110 q40,-40 80,0 q-40,40 -80,0z"/><path d="M60,150 q40,30 100,30 q60,0 100,-30" />`),
-      "Pretzel": SVG("Pretzel", `<path d="M120,150 q-30,-40 10,-60 q40,-20 60,10 q20,30 -10,60 q-30,30 -60,-10z"/>`),
-      "69": SVG("69", `<path d="M120,110 a30,30 0 1,1 0,60 a30,30 0 1,1 0,-60z M200,110 a30,30 0 1,0 0,60 a30,30 0 1,0 0,-60z"/>`)
-    };
-
-    const KAMA_TABLE = {
-      2: "Missionary",
-      3: "Cowgirl",
-      4: "Reverse Cowgirl",
-      5: "Doggy Style",
-      6: "Lotus",
-      7: "Standing",
-      8: "Spooning",
-      9: "Bridge",
-      10:"Butterfly",
-      11:"Pretzel",
-      12:"69"
-    };
-    let kamaLast = null;
-    function rollKama(){
-      const a = 1 + Math.floor(Math.random()*6);
-      const b = 1 + Math.floor(Math.random()*6);
-      renderDie(dieKA, a);
-      renderDie(dieKB, b);
-      const total = a + b;
-
-      // Avoid immediate repeat of position
-      let pos = KAMA_TABLE[total];
-      if(pos === kamaLast){
-        // pick a neighbor if same
-        const alts = Object.values(KAMA_TABLE).filter(n => n !== kamaLast);
-        pos = alts[Math.floor(Math.random()*alts.length)];
-      }
-      kamaLast = pos;
-
-      ddKLabel.textContent = `Roll: ${a} + ${b} = ${total}`;
-      ddKTask.textContent = `Position: ${pos}`;
-      const src = KAMA_IMAGES[pos] || KAMA_IMAGES["Missionary"];
-      kamaImg.src = src;
-      return pos;
-    }
-    ddKRollBtn.onclick = rollKama;
-    ddKSpeakBtn.onclick = ()=> speak(ddKTask.textContent||"");
-
-    // ---------- Service Worker (register) ----------
-    if('serviceWorker' in navigator){
-      window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js'));
-    }
-  </script>
+  <script src="tasks.js"></script>
+  <script src="dice.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
