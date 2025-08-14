@@ -45,10 +45,21 @@ function startGame() {
   intensity = document.getElementById('intensity').value;
   totalRounds = parseInt(document.getElementById('roundCount').value) || 10;
 
+  if (mode === 'dice') {
+    // show dice UI
+    document.getElementById('setup').style.display = 'none';
+    document.getElementById('gameArea').style.display = 'none';
+    document.getElementById('diceArea').style.display = 'block';
+    initDice(); // from dice.js
+    return;
+  }
+
+  // task engine (standard / blitz)
   tasks = generateTasks(mode, intensity, player1Name, player2Name, coupleType).slice(0, totalRounds);
 
   currentTaskIndex = 0;
   document.getElementById('setup').style.display = 'none';
+  document.getElementById('diceArea').style.display = 'none';
   document.getElementById('gameArea').style.display = 'block';
   showTask();
 }
